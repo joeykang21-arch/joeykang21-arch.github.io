@@ -1,0 +1,42 @@
+# YouTube videos shown on the site.
+#
+# id:      the part after "watch?v=" in the YouTube URL
+#          (https://www.youtube.com/watch?v=wFZ_-d0vKNA -> wFZ_-d0vKNA)
+# title:   shown under the video
+# page:    climbing | life
+# section: (life page only) skating | piano | lifting
+# list:    (optional) playlist id, from "&list=..." in the URL
+#
+# Videos appear in the order they are listed here.
+
+- id: wFZ_-d0vKNA
+  title: "He can't keep getting away with this..."
+  page: climbing
+
+- id: Hf0kpQDH4I4
+  title: "I fixed my broken climbing graphs..."
+  page: climbing
+
+- id: p7AiQjazSTY
+  title: "Is Bouldering Ready for V18?"
+  page: climbing
+
+- id: IUaS_ssw0tM
+  title: "When Will 9c+ Be Climbed?"
+  page: climbing
+
+- id: wYYduaBBU6Y
+  title: "Short program, 2018 ISU Junior Grand Prix, Kaunas"
+  page: life
+  section: skating
+  list: PLntGO7HXqCfUHsFfw3coYeRyoKuynKL1Q
+
+- id: IepsgyTfr9g
+  title: "Rachmaninoff Piano Concerto No. 2 at Rose Tree Park"
+  page: life
+  section: piano
+
+- id: uGU5BaFH-Q4
+  title: "My Natural Body Transformation (13-18)"
+  page: life
+  section: lifting

@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+
+const posts = (await getCollection('writing', (p) => !p.data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+// Each category gets its own section. Add a category here (and in
+// src/content.config.ts) to create a new section.
+const sections = [
+  { key: 'ai-safety', title: 'AI safety' },
+  { key: 'personal', title: 'Personal' },
+] as const;
+---
+
+<Base title="Writing" description="Essays by Joseph Kang on AI safety, plus a few personal pieces.">
+  <div class="wrap narrow">
+    <header class="page-head">
+      <h1>Writing</h1>
+      <p class="lede">Essays on AI safety, plus a few personal pieces.</p>
+    </header>
+
+    {
+      sections.map(({ key, title }) => {
+        const list = posts.filter((p) => p.data.category === key);
+        return (
+          list.length > 0 && (
+            <section class="section" aria-label={title}>
+              <h2 class="label">{title}</h2>
+              <PostList posts={list} />
+            </section>
+          )
+        );
+      })
+    }
+
+    <p class="meta feed">Subscribe via <a href="/rss.xml">RSS</a></p>
+  </div>
+</Base>
+
+<style>
+  .feed {
+    margin-top: 3rem;
+  }
+</style>

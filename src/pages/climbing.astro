@@ -1,0 +1,74 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import YouTube from '../components/YouTube.astro';
+
+const videos = (await getCollection('videos', (v) => v.data.page === 'climbing')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const channel = 'https://www.youtube.com/@JoeKangX';
+---
+
+<Base
+  title="Climbing"
+  description="Joseph Kang's climbing: data-driven YouTube videos on climbing grades and the world's best climbers, plus photos."
+>
+  <div class="wrap">
+    <header class="page-head">
+      <h1>Climbing</h1>
+      <p class="lede">
+        I'm an avid rock climber. On my YouTube channel I make data-driven videos about the sport: how the hardest
+        grades got established, when the next ones might fall, and who the best climbers in the world are.
+      </p>
+      <p class="cta"><a class="button" href={channel}>Watch on YouTube ↗</a></p>
+    </header>
+
+    <section class="section" aria-labelledby="videos-title">
+      <h2 class="label" id="videos-title">Videos</h2>
+      <div class="video-grid">
+        {videos.map((v) => <YouTube id={v.id} title={v.data.title} list={v.data.list} />)}
+      </div>
+      <p class="code-note muted">
+        The code and data behind these videos are on GitHub:{' '}
+        <a href="https://github.com/joeykang21-arch/climbing-graphs">climbing-graphs</a>,{' '}
+        <a href="https://github.com/joeykang21-arch/bouldering-grade-history">bouldering-grade-history</a>, and{' '}
+        <a href="https://github.com/joeykang21-arch/sport-climbing-grade-analysis">sport-climbing-grade-analysis</a>.
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="photos-title">
+      <h2 class="label" id="photos-title">On the rock</h2>
+      <div class="photo-pair">
+        <Photo id="climbing-sea-cliff" sizes="(min-width: 760px) 30rem, 100vw" />
+        <Photo id="climbing-boulder" sizes="(min-width: 760px) 30rem, 100vw" />
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .cta {
+    margin-top: 1.5rem;
+  }
+  .video-grid {
+    display: grid;
+    gap: 2rem 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+  }
+  .code-note {
+    margin-top: 2rem;
+    max-width: var(--measure);
+    font-size: 0.95rem;
+  }
+  .photo-pair {
+    display: grid;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  @media (min-width: 640px) {
+    .photo-pair {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

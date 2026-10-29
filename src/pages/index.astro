@@ -1,0 +1,211 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import PostList from '../components/PostList.astro';
+import { LINKS, SITE } from '../site';
+import headshot from '../assets/photos/headshot.jpg';
+
+const posts = (await getCollection('writing', (p) => !p.data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+
+<Base>
+  <div class="wrap">
+    <section class="intro" aria-labelledby="intro-title">
+      <div class="intro-text">
+        <h1 id="intro-title">Joseph Kang</h1>
+        <p class="lede">
+          I work on data and AI at JPMorgan Chase, study AI part-time at Penn, and do independent research on how
+          language models behave under evaluation. I'm moving into AI safety, especially evals.
+        </p>
+        <p>
+          Before this I worked across software engineering, rocketry, electrical engineering and data science, from
+          shrinking neural networks onto FPGAs to building flight hardware for NASA-funded missions. Outside work I'm a
+          rock climber with a <a href="/climbing/">YouTube channel</a>, a former Team USA figure skater, and a former
+          competitive pianist.
+        </p>
+        <ul class="links" aria-label="Elsewhere">
+          {LINKS.map(({ label, href }) => <li><a href={href}>{label}</a></li>)}
+          <li><a href="/resume.pdf">Resume (PDF)</a></li>
+        </ul>
+      </div>
+      <Image
+        class="headshot"
+        src={headshot}
+        alt="Portrait of Joseph Kang"
+        widths={[240, 360, 480, 720]}
+        sizes="(min-width: 760px) 17rem, 9rem"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </section>
+
+    <section class="section now" aria-labelledby="now-title">
+      <h2 class="label" id="now-title">Now</h2>
+      <ul class="now-list">
+        <li>
+          <strong>Looking for a part-time, remote AI safety role.</strong> Longer term I'm most interested in evaluations
+          and forecasting. If you're working on either, <a href={`mailto:${SITE.email}`}>I'd love to hear from you</a>.
+        </li>
+        <li>
+          <strong>Studying</strong> for an M.S.E. in Artificial Intelligence at the University of Pennsylvania,
+          part-time, since August 2026.
+        </li>
+        <li>
+          <strong>Researching</strong> reward hacking and agent behavior on my own time: what makes a model{' '}
+          <a href="/research/#odd-number">game a grader</a>, and whether a swarm of agents sharing answers on a{' '}
+          <a href="/research/#wiki-swarm">public wiki</a> got them right.
+        </li>
+        <li>
+          <strong>Working</strong> as a Data & AI Program Analyst at JPMorgan Chase, and building a data system for the
+          Latino Economic Development Center through JPMC's Force For Good program.
+        </li>
+        <li>
+          <strong>Making</strong> data-driven <a href="/climbing/">climbing videos</a> about how grades have progressed
+          and who the best climbers are.
+        </li>
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="writing-title">
+      <h2 class="label" id="writing-title">Recent writing</h2>
+      <PostList posts={posts} />
+      <p class="more sans"><a href="/writing/">All writing →</a></p>
+    </section>
+
+    <section class="section" aria-labelledby="outside-title">
+      <h2 class="label" id="outside-title">Outside work</h2>
+      <div class="outside">
+        <a href="/climbing/" class="tile">
+          <Photo id="climbing-sea-cliff" sizes="(min-width: 760px) 20rem, 100vw" class="tile-photo" />
+          <span class="tile-label">Climbing</span>
+        </a>
+        <a href="/life/#skating" class="tile">
+          <Photo id="skating-nationals-2021-blue" sizes="(min-width: 760px) 20rem, 100vw" class="tile-photo" />
+          <span class="tile-label">Figure skating</span>
+        </a>
+        <a href="/life/#electronics" class="tile">
+          <Photo id="lab-rocket-payload" sizes="(min-width: 760px) 20rem, 100vw" class="tile-photo" />
+          <span class="tile-label">Rocketry & electronics</span>
+        </a>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .intro {
+    display: grid;
+    gap: 1.75rem;
+    align-items: start;
+  }
+  .intro h1 {
+    margin-bottom: 1rem;
+  }
+  .intro .lede {
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+  .intro p:not(.lede) {
+    color: var(--muted);
+  }
+  .headshot {
+    grid-row: 1;
+    width: 9rem;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  @media (min-width: 760px) {
+    .intro {
+      grid-template-columns: minmax(0, 1fr) 17rem;
+      gap: 3.5rem;
+    }
+    .headshot {
+      grid-row: auto;
+      width: 17rem;
+      border-radius: var(--radius);
+    }
+  }
+  .intro-text {
+    max-width: var(--measure);
+  }
+
+  .now {
+    max-width: var(--measure);
+  }
+  .now-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .now-list li {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+  .now-list li + li {
+    margin-top: 0.8rem;
+  }
+  .now-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.68em;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .now-list strong {
+    font-weight: 650;
+  }
+
+  .more {
+    margin-top: 1rem;
+    font-size: 0.92rem;
+    font-weight: 500;
+  }
+  .more a {
+    text-decoration: none;
+  }
+
+  .outside {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  }
+  .tile {
+    position: relative;
+    display: block;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .tile :global(.tile-photo img) {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    transition: opacity 0.2s;
+  }
+  .tile:hover :global(.tile-photo img) {
+    opacity: 0.85;
+  }
+  /* Captions belong on the Climbing / Life pages, not on these link tiles. */
+  .tile :global(figcaption) {
+    display: none;
+  }
+  .tile-label {
+    display: block;
+    margin-top: 0.5rem;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .tile:hover .tile-label {
+    color: var(--accent);
+  }
+  .tile-label::after {
+    content: ' →';
+  }
+</style>

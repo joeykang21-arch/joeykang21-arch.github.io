@@ -1,0 +1,259 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Mirrors the resume in public/resume.pdf. Update both together.
+const experience = [
+  {
+    role: 'Data & AI Program Analyst',
+    org: 'J.P. Morgan Chase',
+    where: 'Wilmington, DE',
+    when: 'Sep 2025 – present',
+    points: [
+      'Building a first-of-its-kind unified dataset spanning 125M+ customers and 240M+ accounts across the six lines of business in Consumer Banking, supporting a top-priority initiative from senior leadership.',
+      'Built a 100-question evaluation set for an LLM-powered natural-language query environment, then iterated on domain context, semantic metadata and question-to-SQL examples to raise accuracy from 35% to 97%.',
+      'Delivering cross-business insights to dozens of partner teams through SQL and ML-driven analysis, dashboards (Tableau, ThoughtSpot) and custom Python visualizations in Databricks.',
+    ],
+  },
+  {
+    role: 'Software Engineer & Data Scientist, Force For Good',
+    org: 'J.P. Morgan Chase | Latino Economic Development Center',
+    where: 'Washington, DC',
+    when: 'Apr 2026 – present',
+    points: [
+      'Selected for a competitive 6–8 month program pairing JPMC engineers with nonprofits.',
+      'Consolidating fragmented client data for a nonprofit that serves entrepreneurs and homebuyers into one centralized, queryable system, designed so staff can use LLM-powered natural-language queries to match clients with loans, counselors and resources.',
+    ],
+  },
+  {
+    role: 'Undergraduate AI/FPGA Researcher',
+    org: 'Almekkawy Lab, Penn State',
+    where: 'State College, PA',
+    when: 'Jan 2024 – Aug 2025',
+    points: [
+      'Ran a controlled compression study across three segmentation domains, shrinking a U-Net by over 99% and deploying it to an FPGA with over 100× speedup on two datasets. Sole first author of the resulting IEEE IUS 2025 paper.',
+    ],
+    link: { label: 'Research', href: '/research/' },
+  },
+  {
+    role: 'Data Science Intern',
+    org: 'J.P. Morgan Chase',
+    where: 'Newark, DE',
+    when: 'Summer 2024',
+    points: [
+      'Built an ensemble anomaly-detection model (XGBoost + Random Forest) with a live interactive dashboard to flag irregularities in incoming financial reports, and an end-to-end system to calculate and report monthly business metrics.',
+    ],
+  },
+  {
+    role: 'Software Engineer & Technology Captain',
+    org: 'Penn State THON',
+    where: 'State College, PA',
+    when: 'Apr 2023 – Apr 2024',
+    points: [
+      'Developed think.thon.org, the information management system for event registration, donation tracking and resource requests behind a record $17M raised in 2023–2024.',
+    ],
+  },
+  {
+    role: 'Software Engineering Intern',
+    org: 'Prudential Financial',
+    where: 'Newark, NJ',
+    when: 'Summer 2023',
+    points: [
+      'Developed TypeScript APIs and microservices for a customer service platform that lets policyholders query policies, submit changes and contact representatives.',
+    ],
+  },
+  {
+    role: 'Assistant Electrical Engineer',
+    org: 'Detector Development Lab, Penn State',
+    where: 'State College, PA',
+    when: 'Oct 2021 – Oct 2022',
+    points: [
+      'Contributed to two NASA-funded astronomy missions: BlackCAT, a CubeSat wide-field telescope for cosmic transients, and tREXS, a suborbital sounding rocket for soft X-ray spectroscopy.',
+      'Chief assembler for the BlackCAT temperature regulator board (300+ components); assembled and tested flight PCBs and assisted with rocket integration at NASA Wallops Flight Facility.',
+    ],
+    link: { label: 'Photos', href: '/life/#electronics' },
+  },
+];
+
+const education = [
+  {
+    school: 'University of Pennsylvania',
+    degree: 'M.S.E. in Artificial Intelligence (part-time)',
+    when: 'Aug 2026 – May 2028 (expected)',
+    detail: null,
+  },
+  {
+    school: 'Pennsylvania State University, Schreyer Honors College',
+    degree: 'B.S. in Engineering Science & B.S. in Computer Science, summa cum laude',
+    when: 'Aug 2021 – May 2025',
+    detail: 'GPA 3.99 · Honors thesis: Fast and Resource-Efficient Ultrasound Segmentation Using FPGAs',
+  },
+];
+
+const awards = [
+  'President Walker, President Sparks, and Evan Pugh Scholar Awards (top 0.5% of graduating class)',
+  'Dr. Judith A. Todd Copley and Dr. Stephen M. Copley Scholarship in Engineering Science and Mechanics',
+  'Lyle W. and Virginia C. Coffey Scholarship in Engineering Science and Mechanics',
+  'Bronze Medal, 2023 Penn State Competitive Coding Contest',
+];
+
+const skills = {
+  Core: 'Python, PyTorch, SQL, scikit-learn, pandas, NumPy, Matplotlib, Databricks, Git, TensorFlow',
+  Other: 'LLM evals, chain-of-thought analysis, MATLAB, Verilog/HLS, hls4ml, TypeScript, teaching, fundraising',
+};
+---
+
+<Base
+  title="Work"
+  description="Joseph Kang's experience in data, AI, software engineering and research, with a downloadable resume."
+>
+  <div class="wrap narrow">
+    <header class="page-head">
+      <h1>Work</h1>
+      <p class="lede">
+        Data and AI in industry, research in machine learning and space instrumentation, and software engineering along
+        the way.
+      </p>
+      <p class="resume"><a class="button" href="/resume.pdf">Download resume (PDF)</a></p>
+    </header>
+
+    <section class="section" aria-labelledby="exp-title">
+      <h2 class="label" id="exp-title">Experience</h2>
+      <ol class="timeline">
+        {
+          experience.map((job) => (
+            <li>
+              <p class="meta when">{job.when}</p>
+              <div>
+                <h3>{job.role}</h3>
+                <p class="org sans">
+                  {job.org} · {job.where}
+                </p>
+                <ul>
+                  {job.points.map((pt) => (
+                    <li>{pt}</li>
+                  ))}
+                </ul>
+                {job.link && (
+                  <ul class="links">
+                    <li>
+                      <a href={job.link.href}>{job.link.label}</a>
+                    </li>
+                  </ul>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="section" aria-labelledby="edu-title">
+      <h2 class="label" id="edu-title">Education</h2>
+      <ol class="timeline">
+        {
+          education.map((e) => (
+            <li>
+              <p class="meta when">{e.when}</p>
+              <div>
+                <h3>{e.school}</h3>
+                <p class="org sans">{e.degree}</p>
+                {e.detail && <p class="detail">{e.detail}</p>}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="section" aria-labelledby="awards-title">
+      <h2 class="label" id="awards-title">Awards</h2>
+      <ul class="plain">
+        {awards.map((a) => <li>{a}</li>)}
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="skills-title">
+      <h2 class="label" id="skills-title">Skills</h2>
+      <dl class="skills">
+        {
+          Object.entries(skills).map(([k, v]) => (
+            <>
+              <dt class="sans">{k}</dt>
+              <dd>{v}</dd>
+            </>
+          ))
+        }
+      </dl>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .resume {
+    margin-top: 1.5rem;
+  }
+  .timeline {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .timeline > li {
+    display: grid;
+    gap: 0.25rem 1.5rem;
+  }
+  .timeline > li + li {
+    margin-top: 2rem;
+  }
+  @media (min-width: 640px) {
+    .timeline > li {
+      grid-template-columns: 9.5rem 1fr;
+    }
+  }
+  .when {
+    margin: 0.3rem 0 0;
+  }
+  .timeline h3 {
+    font-size: 1.15rem;
+  }
+  .org {
+    margin: 0.2rem 0 0.5rem;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+  .timeline ul:not(.links) {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 0.98em;
+  }
+  .timeline ul:not(.links) li + li {
+    margin-top: 0.35rem;
+  }
+  .timeline ul:not(.links) li::marker {
+    color: var(--muted);
+  }
+  .detail {
+    margin: 0;
+    font-size: 0.95em;
+  }
+  .plain {
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+  .plain li + li {
+    margin-top: 0.35rem;
+  }
+  .skills {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.5rem 1.25rem;
+    margin: 0;
+  }
+  .skills dt {
+    font-weight: 600;
+    font-size: 0.92rem;
+    padding-top: 0.1rem;
+  }
+  .skills dd {
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,230 @@
+---
+import Base from '../layouts/Base.astro';
+
+const GH = 'https://github.com/joeykang21-arch';
+
+const projects = [
+  {
+    id: 'odd-number',
+    title: 'Why does the model output an odd number?',
+    subtitle: 'Reward-hacking forensics on a reasoning LLM',
+    when: 'August – October 2026',
+    note: 'Begun as a take-home for the SPAR Model Forensics project and extended independently.',
+    summary:
+      "In the Odd Number environment, a user asks for an even number but an in-context grader rewards only odd ones. I ran 14 prompt conditions (3,025 rollouts, full chain of thought saved) on DeepSeek V4 Flash to find out what changes how often the model games the grader.",
+    findings: [
+      'Gaming tracks how enforceable a check looks, not its stated probability. Naming a human reviewer cut gaming from 92% to 0%; naming a regex checker only brought it to 36%. Stated audit rates from 25% to 100% were indistinguishable.',
+      'The model\'s stated reason is not the cause. "Auditing is paused" did not raise gaming over a neutral audit mention (66% vs 77%), yet 84% of gaming chains of thought cite the pause.',
+      'Test-awareness language does not predict compliance. It appears in 76–100% of chains of thought in every condition, while gaming ranges from 0% to 96%.',
+    ],
+    links: [
+      { label: 'Write-up', href: `${GH}/odd-number-forensics/blob/main/WRITEUP.md` },
+      { label: 'Code & data', href: `${GH}/odd-number-forensics` },
+    ],
+  },
+  {
+    id: 'wiki-swarm',
+    title: 'German wiki swarm: were the agents\' answers correct?',
+    subtitle: 'Correctness and coordination in an agent swarm incident',
+    when: 'October 2026',
+    note: null,
+    summary:
+      'In June 2026, many copies of OpenAI agents doing timed quizzes about public statistics used a German community wiki as a shared message board. Earlier investigations described how they coordinated. I checked whether the answers they posted matched the official DataUSA and OECD data, and whether the board helped or spread errors, across the four busiest task families.',
+    findings: [
+      'When a question had a clear answer, every number posted as a solution was correct. Wrong numbers appeared only when agents admitted their own mistakes after the fact.',
+      'Where the question wording was ambiguous (the OECD and French tasks), the board changed which interpretation agents converged on and submitted.',
+      'No agent publicly questioned whether the coordination was appropriate, and none thought to alert a human or other monitor.',
+    ],
+    links: [
+      { label: 'Write-up', href: `${GH}/german-wiki-swarm-accuracy/blob/main/writeup.md` },
+      { label: 'Interactive timelines', href: 'https://joeykang21-arch.github.io/german-wiki-swarm-accuracy/' },
+      { label: 'Code & data', href: `${GH}/german-wiki-swarm-accuracy` },
+    ],
+  },
+];
+
+const publications = [
+  {
+    authors: ['Joseph Kang', 'Ahmed Al-Qurri', 'Mohamed Almekkawy'],
+    etAl: false,
+    title: 'Fast and Resource-Efficient Ultrasound Segmentation Using FPGAs',
+    venue: '2025 IEEE International Ultrasonics Symposium (IUS)',
+    detail: 'Utrecht, Netherlands, September 2025',
+    tag: 'First author',
+    summary:
+      'Compressed a U-Net from about 31M to under 60K parameters (over 99%) across brain-tumor, pet and cardiac-ultrasound segmentation, synthesized it for a Xilinx XCU250 FPGA with hls4ml, and benchmarked it against CPU, GPU and TPU baselines: under 1 ms and over 100× faster on two datasets, about 8 ms and 13× faster on cardiac ultrasound. This work was also my undergraduate honors thesis.',
+    links: [
+      { label: 'Paper (IEEE Xplore)', href: 'https://doi.org/10.1109/IUS62464.2025.11201783' },
+      { label: 'Penn State record', href: 'https://pure.psu.edu/en/publications/fast-and-resource-efficient-ultrasound-segmentation-using-fpgas/' },
+    ],
+  },
+  {
+    authors: ['James H. Tutt', 'Drew M. Miles', 'Ross McCurdy', 'Joseph Kang'],
+    etAl: true,
+    title: 'Focal plane camera on tREXS',
+    venue: 'Journal of Astronomical Telescopes, Instruments, and Systems',
+    detail: '12(2), 026001, 2026',
+    tag: 'Co-author',
+    summary:
+      'Describes the focal plane camera for tREXS, a NASA-funded suborbital sounding rocket for soft X-ray spectroscopy. I contributed as an assistant electrical engineer in Penn State\'s Detector Development Lab.',
+    links: [{ label: 'Paper (SPIE)', href: 'https://doi.org/10.1117/1.JATIS.12.2.026001' }],
+  },
+];
+
+const dataProjects = [
+  {
+    title: 'Climbing grade analysis',
+    when: 'March 2026 – present',
+    summary:
+      'Scraped and cleaned decades of public ascent records from climbing-history.org and 8a.nu, modeled how top grades progress over time, and ranked the best climbers under several scoring systems. I publish the results as video essays that have each reached 20–35K viewers.',
+    links: [
+      { label: 'Videos', href: '/climbing/' },
+      { label: 'climbing-graphs', href: `${GH}/climbing-graphs` },
+      { label: 'bouldering-grade-history', href: `${GH}/bouldering-grade-history` },
+      { label: 'sport-climbing-grade-analysis', href: `${GH}/sport-climbing-grade-analysis` },
+    ],
+  },
+];
+---
+
+<Base
+  title="Research"
+  description="Joseph Kang's independent AI safety research on reward hacking and agent behavior, plus publications in IEEE IUS and JATIS."
+>
+  <div class="wrap narrow">
+    <header class="page-head">
+      <h1>Research</h1>
+      <p class="lede">
+        Independent AI safety work on how models behave under graders and oversight, plus earlier research in FPGA
+        machine learning and space instrumentation.
+      </p>
+    </header>
+
+    <section class="section" aria-labelledby="ai-title">
+      <h2 class="label" id="ai-title">Independent AI safety research</h2>
+      {
+        projects.map((p) => (
+          <article class="entry" id={p.id}>
+            <p class="meta">{p.when}</p>
+            <h3>{p.title}</h3>
+            <p class="subtitle sans">{p.subtitle}</p>
+            <p>{p.summary}</p>
+            <ul class="findings">
+              {p.findings.map((f) => (
+                <li>{f}</li>
+              ))}
+            </ul>
+            {p.note && <p class="note">{p.note}</p>}
+            <ul class="links">
+              {p.links.map((l) => (
+                <li>
+                  <a href={l.href}>{l.label}</a>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </section>
+
+    <section class="section" aria-labelledby="pub-title">
+      <h2 class="label" id="pub-title">Publications</h2>
+      {
+        publications.map((p) => (
+          <article class="entry">
+            <p class="meta">{p.tag}</p>
+            <h3>{p.title}</h3>
+            <p class="authors sans">
+              {p.authors.map((a, i) => (
+                <>
+                  {i > 0 && ', '}
+                  {a === 'Joseph Kang' ? <strong>{a}</strong> : a}
+                </>
+              ))}
+              {p.etAl && ', et al.'}
+            </p>
+            <p class="venue">
+              <em>{p.venue}</em>, {p.detail}
+            </p>
+            <p>{p.summary}</p>
+            <ul class="links">
+              {p.links.map((l) => (
+                <li>
+                  <a href={l.href}>{l.label}</a>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </section>
+
+    <section class="section" aria-labelledby="data-title">
+      <h2 class="label" id="data-title">Data projects</h2>
+      {
+        dataProjects.map((p) => (
+          <article class="entry">
+            <p class="meta">{p.when}</p>
+            <h3>{p.title}</h3>
+            <p>{p.summary}</p>
+            <ul class="links">
+              {p.links.map((l) => (
+                <li>
+                  <a href={l.href}>{l.label}</a>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </section>
+  </div>
+</Base>
+
+<style>
+  .entry {
+    scroll-margin-top: 1.5rem;
+  }
+  .entry + .entry {
+    margin-top: 2.25rem;
+    padding-top: 2.25rem;
+    border-top: 1px solid var(--rule);
+  }
+  .entry .meta {
+    margin-bottom: 0.35rem;
+  }
+  .entry h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+  }
+  .entry p {
+    margin-bottom: 0.75rem;
+  }
+  .subtitle,
+  .authors {
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+  .authors strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .venue {
+    font-size: 0.98rem;
+  }
+  .findings {
+    margin: 0 0 0.75rem;
+    padding-left: 1.2rem;
+  }
+  .findings li + li {
+    margin-top: 0.4rem;
+  }
+  .findings li::marker {
+    color: var(--accent);
+  }
+  .note {
+    font-size: 0.92rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+</style>

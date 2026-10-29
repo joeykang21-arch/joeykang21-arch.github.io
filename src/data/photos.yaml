@@ -1,0 +1,65 @@
+# Alt text, captions and credits for photos in src/assets/photos/.
+# The key (id) is the image filename without ".jpg".
+#
+# alt:     describes the image for screen readers (required)
+# caption: shown under the image; replace "TBD" with your own text,
+#          or set it to "" to show no caption
+# credit:  (optional) photographer, shown after the caption
+
+headshot:
+  alt: "Joseph Kang"
+  caption: ""
+
+climbing-sea-cliff:
+  alt: "Climbing a limestone sea cliff above deep blue water, seen from above"
+  caption: "TBD"
+
+climbing-boulder:
+  alt: "Climbing a tall granite boulder, seen from below"
+  caption: "TBD"
+
+lab-trexs-hardware:
+  alt: "Smiling behind stacked flight electronics and a circuit board labeled tREXS in a lab"
+  caption: "TBD"
+
+lab-blackcat-board:
+  alt: "Holding up a purple BlackCAT circuit board in a gloved hand"
+  caption: "TBD"
+
+lab-rocket-payload:
+  alt: "Standing next to an open sounding-rocket payload section in a lab"
+  caption: "TBD"
+
+lab-payload-integration:
+  alt: "An open rocket payload under a plastic sheet next to a laptop, with technicians in the background"
+  caption: "TBD"
+
+skating-nationals-2021-red:
+  alt: "Figure skating in a red top at the 2021 U.S. Figure Skating Championships"
+  caption: "TBD"
+  credit: "Robin Ritoss"
+
+skating-nationals-2021-blue:
+  alt: "Figure skating in a blue top at the 2021 U.S. Figure Skating Championships in Las Vegas"
+  caption: "TBD"
+  credit: "Robin Ritoss"
+
+skating-spread-eagle:
+  alt: "Leaning low to the ice in a deep edge, one arm reaching back"
+  caption: "TBD"
+
+skating-glide:
+  alt: "Mid-air, body horizontal, during a skating move"
+  caption: "TBD"
+
+skating-backflip:
+  alt: "Black-and-white photo of a backflip on the ice in front of a crowd"
+  caption: "TBD"
+
+piano-recital:
+  alt: "Playing a grand piano on stage in an ornate hall"
+  caption: "TBD"
+
+piano-orchestra:
+  alt: "Playing piano with a full orchestra at an outdoor bandshell at dusk"
+  caption: "TBD"

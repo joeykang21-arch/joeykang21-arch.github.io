@@ -1,0 +1,163 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import YouTube from '../components/YouTube.astro';
+
+const videos = (await getCollection('videos', (v) => v.data.page === 'life')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const videosFor = (section: string) => videos.filter((v) => v.data.section === section);
+const gallerySizes = '(min-width: 760px) 20rem, 50vw';
+---
+
+<Base
+  title="Life"
+  description="Outside work: Team USA figure skating, competitive piano, lifting, and building space hardware."
+>
+  <div class="wrap">
+    <header class="page-head">
+      <h1>Life</h1>
+      <p class="lede">
+        Beyond work and research. Climbing has <a href="/climbing/">its own page</a>; here is everything else.
+      </p>
+      <nav class="toc sans" aria-label="On this page">
+        <a href="#skating">Figure skating</a>
+        <a href="#piano">Piano</a>
+        <a href="#lifting">Lifting</a>
+        <a href="#electronics">Rocketry & electronics</a>
+        <a href="#other">Other interests</a>
+      </nav>
+    </header>
+
+    <section class="section block" id="skating" aria-labelledby="skating-title">
+      <h2 class="label" id="skating-title">Figure skating</h2>
+      <div class="split">
+        <div class="text">
+          <p>
+            I was a member of Team USA in figure skating and competed nationally and internationally many times. From
+            2019 to 2021 I also taught skating, in both group and private lessons.
+          </p>
+        </div>
+        <div class="media">
+          {videosFor('skating').map((v) => <YouTube id={v.id} title={v.data.title} list={v.data.list} />)}
+        </div>
+      </div>
+      <div class="gallery">
+        <Photo id="skating-nationals-2021-blue" sizes={gallerySizes} />
+        <Photo id="skating-glide" sizes={gallerySizes} />
+        <Photo id="skating-backflip" sizes={gallerySizes} />
+        <Photo id="skating-nationals-2021-red" sizes={gallerySizes} />
+        <Photo id="skating-spread-eagle" sizes={gallerySizes} />
+      </div>
+    </section>
+
+    <section class="section block" id="piano" aria-labelledby="piano-title">
+      <h2 class="label" id="piano-title">Piano</h2>
+      <div class="split">
+        <div class="text">
+          <p>
+            I was a competitive pianist and won state competitions. Like skating, I taught piano to students of all ages
+            from 2019 to 2021.
+          </p>
+        </div>
+        <div class="media">
+          {videosFor('piano').map((v) => <YouTube id={v.id} title={v.data.title} />)}
+        </div>
+      </div>
+      <div class="gallery two">
+        <Photo id="piano-orchestra" sizes={gallerySizes} />
+        <Photo id="piano-recital" sizes={gallerySizes} />
+      </div>
+    </section>
+
+    <section class="section block" id="lifting" aria-labelledby="lifting-title">
+      <h2 class="label" id="lifting-title">Lifting</h2>
+      <div class="split">
+        <div class="text">
+          <p>I'm an avid weightlifting and bodybuilding enthusiast. Here's my natural transformation from 13 to 18.</p>
+        </div>
+        <div class="media">
+          {videosFor('lifting').map((v) => <YouTube id={v.id} title={v.data.title} />)}
+        </div>
+      </div>
+    </section>
+
+    <section class="section block" id="electronics" aria-labelledby="electronics-title">
+      <h2 class="label" id="electronics-title">Rocketry & electronics</h2>
+      <div class="text">
+        <p>
+          In Penn State's Detector Development Lab I worked on hardware for two NASA-funded missions: BlackCAT, a
+          CubeSat wide-field telescope, and tREXS, a suborbital sounding rocket for soft X-ray spectroscopy. I was chief
+          assembler for BlackCAT's temperature regulator board, assembled and tested flight circuit boards, and helped
+          with rocket integration at NASA Wallops Flight Facility. <a href="/work/">More on the Work page</a>.
+        </p>
+      </div>
+      <div class="gallery">
+        <Photo id="lab-rocket-payload" sizes={gallerySizes} />
+        <Photo id="lab-blackcat-board" sizes={gallerySizes} />
+        <Photo id="lab-trexs-hardware" sizes={gallerySizes} />
+        <Photo id="lab-payload-integration" sizes={gallerySizes} />
+      </div>
+    </section>
+
+    <section class="section block" id="other" aria-labelledby="other-title">
+      <h2 class="label" id="other-title">Other interests</h2>
+      <div class="text">
+        <p>Philosophy, recreational sports, traveling, and video games.</p>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.1rem;
+    margin-top: 1.5rem;
+    font-size: 0.92rem;
+    font-weight: 500;
+  }
+  .toc a {
+    text-decoration: none;
+  }
+  .toc a:hover {
+    text-decoration: underline;
+  }
+  .block {
+    scroll-margin-top: 1.5rem;
+  }
+  .text {
+    max-width: var(--measure);
+  }
+  .split {
+    display: grid;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  @media (min-width: 860px) {
+    .split {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      gap: 2.5rem;
+    }
+  }
+  .gallery {
+    margin-top: 2rem;
+    columns: 2 9rem;
+    column-gap: 1rem;
+  }
+  @media (min-width: 860px) {
+    .gallery {
+      columns: 3;
+    }
+    .gallery.two {
+      columns: 2;
+      max-width: 48rem;
+    }
+  }
+  .gallery :global(figure) {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+  }
+</style>

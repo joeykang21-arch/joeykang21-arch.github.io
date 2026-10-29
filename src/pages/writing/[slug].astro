@@ -1,0 +1,61 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { formatDate } from '../../site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('writing', (p) => !p.data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+interface Props {
+  post: CollectionEntry<'writing'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const words = (post.body ?? '').split(/\s+/).filter(Boolean).length;
+const minutes = Math.max(1, Math.round(words / 230));
+const categoryLabel = { 'ai-safety': 'AI safety', personal: 'Personal' }[post.data.category];
+---
+
+<Base title={post.data.title} description={post.data.description} type="article">
+  <article class="wrap narrow">
+    <header class="post-head">
+      <p class="meta">
+        <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+        <span aria-hidden="true"> · </span>{minutes} min read
+        <span aria-hidden="true"> · </span>{categoryLabel}
+      </p>
+      <h1>{post.data.title}</h1>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+    <footer class="post-foot sans">
+      <a href="/writing/">← All writing</a>
+    </footer>
+  </article>
+</Base>
+
+<style>
+  .post-head {
+    margin-bottom: 2.5rem;
+  }
+  .post-head .meta {
+    margin-bottom: 0.9rem;
+  }
+  .post-head h1 {
+    font-size: clamp(1.9rem, 1.5rem + 1.8vw, 2.6rem);
+  }
+  .post-foot {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.92rem;
+    font-weight: 500;
+  }
+  .post-foot a {
+    text-decoration: none;
+  }
+</style>
