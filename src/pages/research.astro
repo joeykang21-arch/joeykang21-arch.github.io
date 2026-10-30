@@ -95,37 +95,11 @@ const dataProjects = [
     <header class="page-head">
       <h1>Research</h1>
       <p class="lede">
-        Independent AI safety work on how models behave under graders and oversight, plus earlier research in FPGA
-        machine learning and space instrumentation.
+        Currently doing independent AI safety work on how models behave under graders and oversight. Previously, was
+        first author at the International Ultrasonics Symposium for accelerating neural networks onto FPGAs and
+        co-author on a NASA-funded space instrumentation mission.
       </p>
     </header>
-
-    <section class="section" aria-labelledby="ai-title">
-      <h2 class="label" id="ai-title">Independent AI safety research</h2>
-      {
-        projects.map((p) => (
-          <article class="entry" id={p.id}>
-            <p class="meta">{p.when}</p>
-            <h3>{p.title}</h3>
-            <p class="subtitle sans">{p.subtitle}</p>
-            <p>{p.summary}</p>
-            <ul class="findings">
-              {p.findings.map((f) => (
-                <li>{f}</li>
-              ))}
-            </ul>
-            {p.note && <p class="note">{p.note}</p>}
-            <ul class="links">
-              {p.links.map((l) => (
-                <li>
-                  <a href={l.href}>{l.label}</a>
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))
-      }
-    </section>
 
     <section class="section" aria-labelledby="pub-title">
       <h2 class="label" id="pub-title">Publications</h2>
@@ -147,6 +121,33 @@ const dataProjects = [
               <em>{p.venue}</em>, {p.detail}
             </p>
             <p>{p.summary}</p>
+            <ul class="links">
+              {p.links.map((l) => (
+                <li>
+                  <a href={l.href}>{l.label}</a>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </section>
+
+    <section class="section" aria-labelledby="ai-title">
+      <h2 class="label" id="ai-title">Independent AI safety research</h2>
+      {
+        projects.map((p) => (
+          <article class="entry" id={p.id}>
+            <p class="meta">{p.when}</p>
+            <h3>{p.title}</h3>
+            <p class="subtitle sans">{p.subtitle}</p>
+            <p>{p.summary}</p>
+            <ul class="findings">
+              {p.findings.map((f) => (
+                <li>{f}</li>
+              ))}
+            </ul>
+            {p.note && <p class="note">{p.note}</p>}
             <ul class="links">
               {p.links.map((l) => (
                 <li>
