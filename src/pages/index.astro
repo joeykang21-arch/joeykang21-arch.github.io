@@ -80,15 +80,15 @@ const posts = (await getCollection('writing', (p) => !p.data.draft))
       <h2 class="label" id="outside-title">Outside work</h2>
       <div class="outside">
         <a href="/climbing/" class="tile">
-          <Photo id="climbing-sea-cliff" sizes="(min-width: 760px) 20rem, 100vw" class="tile-photo" />
+          <Photo id="climbing-sea-cliff" sizes="(min-width: 760px) 20rem, 100vw" crop={4 / 5} class="tile-photo" />
           <span class="tile-label">Climbing</span>
         </a>
         <a href="/life/#skating" class="tile">
-          <Photo id="skating-nationals-2021-blue" sizes="(min-width: 760px) 20rem, 100vw" class="tile-photo" />
+          <Photo id="skating-nationals-2021-blue" sizes="(min-width: 760px) 20rem, 100vw" crop={4 / 5} class="tile-photo" />
           <span class="tile-label">Figure skating</span>
         </a>
         <a href="/life/#electronics" class="tile">
-          <Photo id="lab-rocket-payload" sizes="(min-width: 760px) 20rem, 100vw" class="tile-photo" />
+          <Photo id="lab-rocket-payload" sizes="(min-width: 760px) 20rem, 100vw" crop={4 / 5} class="tile-photo" />
           <span class="tile-label">Rocketry & electronics</span>
         </a>
       </div>
