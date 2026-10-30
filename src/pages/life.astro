@@ -121,6 +121,15 @@ const videosFor = (section: string) => videos.filter((v) => v.data.section === s
       <div class="text">
         <p>Philosophy, recreational sports, traveling, and video games.</p>
       </div>
+      <Gallery
+        rows={[
+          [
+            { id: 'other-badlands', shape: 'wide' },
+            { id: 'other-frozen-lake', shape: 'wide' },
+            { id: 'other-night-sky', shape: 'wide' },
+          ],
+        ]}
+      />
     </section>
   </div>
 </Base>
