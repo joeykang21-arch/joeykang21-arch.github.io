@@ -45,11 +45,11 @@ skating-nationals-2021-blue:
   credit: "Robin Ritoss"
 
 skating-spread-eagle:
-  alt: "Leaning low to the ice in a deep edge, one arm reaching back"
+  alt: "Mid-air, body horizontal, during a skating move"
   caption: "TBD"
 
 skating-glide:
-  alt: "Mid-air, body horizontal, during a skating move"
+  alt: "Leaning low to the ice in a deep edge, one arm reaching back"
   caption: "TBD"
 
 skating-backflip:
@@ -58,6 +58,14 @@ skating-backflip:
 
 piano-recital:
   alt: "Playing a grand piano on stage in an ornate hall"
+  caption: "TBD"
+
+skating-jump:
+  alt: "Jumping straight up on the ice with arms crossed, wearing a denim vest"
+  caption: "TBD"
+
+piano-concerto:
+  alt: "Playing a grand piano on stage with an orchestra"
   caption: "TBD"
 
 piano-orchestra:

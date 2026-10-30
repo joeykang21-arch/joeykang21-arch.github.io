@@ -1,0 +1,71 @@
+---
+// Photos in rows of equal height. Each photo is cropped to a tall (4:5) or
+// wide (3:2) shape, so every row lines up. On phones, tall photos sit two
+// to a row and wide photos take the full width.
+import Photo from './Photo.astro';
+
+type Shape = 'tall' | 'wide';
+interface Item {
+  id: string;
+  shape: Shape;
+  /** Which part to keep when cropping, e.g. 'top' or 'left'. Default: center. */
+  position?: string;
+}
+interface Props {
+  rows: Item[][];
+}
+
+const ratio: Record<Shape, number> = { tall: 4 / 5, wide: 3 / 2 };
+const sizes: Record<Shape, string> = {
+  tall: '(min-width: 640px) 16rem, 50vw',
+  wide: '(min-width: 640px) 30rem, 100vw',
+};
+const { rows } = Astro.props;
+---
+
+<div class="gallery">
+  {
+    rows.map((row) => (
+      <div class="row">
+        {row.map(({ id, shape, position }) => (
+          <div class:list={['cell', shape]} style={`--ratio: ${ratio[shape]}`}>
+            <Photo id={id} crop={ratio[shape]} position={position} sizes={sizes[shape]} />
+          </div>
+        ))}
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .gallery {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-flow: dense;
+    gap: 1rem 0.75rem;
+  }
+  .row {
+    display: contents;
+  }
+  .wide {
+    grid-column: span 2;
+  }
+  @media (min-width: 640px) {
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .row {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    /* Width proportional to aspect ratio gives every photo in a row the same height. */
+    .cell {
+      flex: var(--ratio) 1 0;
+      min-width: 0;
+    }
+  }
+</style>

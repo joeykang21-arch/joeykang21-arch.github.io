@@ -12,11 +12,13 @@ interface Props {
   class?: string;
   /** Crop to this width/height ratio at build time, e.g. 4 / 5 for the home page tiles. */
   crop?: number;
+  /** Which part to keep when cropping, like CSS object-position: 'center', 'top', 'left'. */
+  position?: string;
 }
 
 const images = import.meta.glob<{ default: ImageMetadata }>('../assets/photos/*.jpg', { eager: true });
 
-const { id, sizes = '(min-width: 760px) 30rem, 100vw', loading = 'lazy', class: className, crop } = Astro.props;
+const { id, sizes = '(min-width: 760px) 30rem, 100vw', loading = 'lazy', class: className, crop, position } = Astro.props;
 const image = images[`../assets/photos/${id}.jpg`]?.default;
 const entry = await getEntry('photos', id);
 if (!image) throw new Error(`Photo "${id}": no file at src/assets/photos/${id}.jpg`);
@@ -28,7 +30,7 @@ const { alt, caption, credit } = entry.data;
 const cropWidth = crop ? Math.round(Math.min(image.width, image.height * crop)) : undefined;
 const widths = [400, 700, 1000, 1400].filter((w) => !cropWidth || w < cropWidth);
 if (cropWidth) widths.push(cropWidth);
-const cropSize = crop && cropWidth ? { width: cropWidth, height: Math.round(cropWidth / crop), fit: 'cover' as const } : {};
+const cropSize = crop && cropWidth ? { width: cropWidth, height: Math.round(cropWidth / crop), fit: 'cover' as const, position } : {};
 ---
 
 <figure class:list={['photo', className]}>

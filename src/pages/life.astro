@@ -1,14 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import Photo from '../components/Photo.astro';
+import Gallery from '../components/Gallery.astro';
 import YouTube from '../components/YouTube.astro';
 
 const videos = (await getCollection('videos', (v) => v.data.page === 'life')).sort(
   (a, b) => a.data.order - b.data.order,
 );
 const videosFor = (section: string) => videos.filter((v) => v.data.section === section);
-const gallerySizes = '(min-width: 760px) 20rem, 50vw';
 ---
 
 <Base
@@ -19,7 +18,7 @@ const gallerySizes = '(min-width: 760px) 20rem, 50vw';
     <header class="page-head">
       <h1>Life</h1>
       <p class="lede">
-        Beyond work and research. Climbing has <a href="/climbing/">its own page</a>; here is everything else.
+        Everything beyond work, research, and <a href="/climbing/">climbing</a>.
       </p>
       <nav class="toc sans" aria-label="On this page">
         <a href="#skating">Figure skating</a>
@@ -43,13 +42,20 @@ const gallerySizes = '(min-width: 760px) 20rem, 50vw';
           {videosFor('skating').map((v) => <YouTube id={v.id} title={v.data.title} list={v.data.list} />)}
         </div>
       </div>
-      <div class="gallery">
-        <Photo id="skating-nationals-2021-blue" sizes={gallerySizes} />
-        <Photo id="skating-glide" sizes={gallerySizes} />
-        <Photo id="skating-backflip" sizes={gallerySizes} />
-        <Photo id="skating-nationals-2021-red" sizes={gallerySizes} />
-        <Photo id="skating-spread-eagle" sizes={gallerySizes} />
-      </div>
+      <Gallery
+        rows={[
+          [
+            { id: 'skating-nationals-2021-blue', shape: 'tall' },
+            { id: 'skating-glide', shape: 'wide' },
+            { id: 'skating-backflip', shape: 'tall' },
+          ],
+          [
+            { id: 'skating-nationals-2021-red', shape: 'tall' },
+            { id: 'skating-spread-eagle', shape: 'wide' },
+            { id: 'skating-jump', shape: 'tall' },
+          ],
+        ]}
+      />
     </section>
 
     <section class="section block" id="piano" aria-labelledby="piano-title">
@@ -65,10 +71,15 @@ const gallerySizes = '(min-width: 760px) 20rem, 50vw';
           {videosFor('piano').map((v) => <YouTube id={v.id} title={v.data.title} />)}
         </div>
       </div>
-      <div class="gallery two">
-        <Photo id="piano-orchestra" sizes={gallerySizes} />
-        <Photo id="piano-recital" sizes={gallerySizes} />
-      </div>
+      <Gallery
+        rows={[
+          [
+            { id: 'piano-orchestra', shape: 'wide' },
+            { id: 'piano-recital', shape: 'wide' },
+            { id: 'piano-concerto', shape: 'wide' },
+          ],
+        ]}
+      />
     </section>
 
     <section class="section block" id="lifting" aria-labelledby="lifting-title">
@@ -93,12 +104,16 @@ const gallerySizes = '(min-width: 760px) 20rem, 50vw';
           with rocket integration at NASA Wallops Flight Facility. <a href="/work/">More on the Work page</a>.
         </p>
       </div>
-      <div class="gallery">
-        <Photo id="lab-rocket-payload" sizes={gallerySizes} />
-        <Photo id="lab-blackcat-board" sizes={gallerySizes} />
-        <Photo id="lab-trexs-hardware" sizes={gallerySizes} />
-        <Photo id="lab-payload-integration" sizes={gallerySizes} />
-      </div>
+      <Gallery
+        rows={[
+          [
+            { id: 'lab-rocket-payload', shape: 'tall' },
+            { id: 'lab-blackcat-board', shape: 'tall' },
+            { id: 'lab-trexs-hardware', shape: 'tall' },
+            { id: 'lab-payload-integration', shape: 'tall' },
+          ],
+        ]}
+      />
     </section>
 
     <section class="section block" id="other" aria-labelledby="other-title">
@@ -141,23 +156,5 @@ const gallerySizes = '(min-width: 760px) 20rem, 50vw';
       grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
       gap: 2.5rem;
     }
-  }
-  .gallery {
-    margin-top: 2rem;
-    columns: 2 9rem;
-    column-gap: 1rem;
-  }
-  @media (min-width: 860px) {
-    .gallery {
-      columns: 3;
-    }
-    .gallery.two {
-      columns: 2;
-      max-width: 48rem;
-    }
-  }
-  .gallery :global(figure) {
-    break-inside: avoid;
-    margin-bottom: 1rem;
   }
 </style>
