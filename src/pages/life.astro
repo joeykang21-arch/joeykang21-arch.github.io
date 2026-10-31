@@ -25,6 +25,7 @@ const videosFor = (section: string) => videos.filter((v) => v.data.section === s
         <a href="#piano">Piano</a>
         <a href="#lifting">Lifting</a>
         <a href="#electronics">Rocketry & electronics</a>
+        <a href="#projects">University projects</a>
         <a href="#other">Other interests</a>
       </nav>
     </header>
@@ -114,6 +115,22 @@ const videosFor = (section: string) => videos.filter((v) => v.data.section === s
           ],
         ]}
       />
+    </section>
+
+    <section class="section block" id="projects" aria-labelledby="projects-title">
+      <h2 class="label" id="projects-title">University projects</h2>
+      <div class="text">
+        <ul>
+          <li>
+            <strong>Numerical methods in MATLAB</strong> (ESC 407): a Fourier transform written without built-in
+            functions, and a root-finding solver for the chaotic Duffing equation.
+          </li>
+          <li>
+            <strong>Digital design</strong>: a breadboard logic-gate circuit that spells out different words on LEDs
+            depending on its inputs.
+          </li>
+        </ul>
+      </div>
     </section>
 
     <section class="section block" id="other" aria-labelledby="other-title">
