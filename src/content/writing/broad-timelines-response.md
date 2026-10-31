@@ -1,6 +1,6 @@
 ---
 title: "On Toby Ord’s “Broad Timelines”"
-date: 2026-10-29
+date: 2026-09-29
 description: "Why overshooting and undershooting AI timelines shouldn’t be weighted equally, and why worrying about looking discredited shouldn’t slow down safety work."
 category: ai-safety
 ---
