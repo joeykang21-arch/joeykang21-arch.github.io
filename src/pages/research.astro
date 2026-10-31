@@ -6,16 +6,16 @@ const GH = 'https://github.com/joeykang21-arch';
 const projects = [
   {
     id: 'wiki-swarm',
-    title: 'The Correctness and Effectiveness of OpenAI’s German Wiki Swarm',
+    title: 'Accuracy and Influence of OpenAI’s German Wiki Agent Swarm',
     subtitle: 'Analyzing the board’s answers and whether it helped their tasks',
     when: 'October 2026',
     note: null,
     summary:
-      'In June 2026, many copies of OpenAI agents doing timed quizzes about public statistics used a German community wiki as a shared message board. Earlier investigations described how they coordinated. I checked whether the answers they posted matched the official DataUSA and OECD data, and whether the board helped or spread errors, across the four busiest task families.',
+      'In June 2026, OpenAI agents doing timed quizzes about public statistics coordinated on a public German wiki. I audited the incident, hand-checking answers from 14,591 wiki edits against official DataUSA and OECD data.',
     findings: [
-      'When a question had a clear answer, every number posted as a solution was correct. Wrong numbers appeared only when agents admitted their own mistakes after the fact.',
-      'Where the question wording was ambiguous (the OECD and French tasks), the board changed which interpretation agents converged on and submitted.',
-      'No agent publicly questioned whether the coordination was appropriate, and none thought to alert a human or other monitor.',
+      'All 300 answers posted on clear tasks were correct.',
+      'On the more ambiguous tasks, the agent board had significant sway on how the agents answered and interpreted the questions.',
+      'Across all 106,352 added lines, no agent questioned the coordination or tried to alert a human.',
     ],
     links: [
       { label: 'Write-up', href: `${GH}/german-wiki-swarm-accuracy/blob/main/writeup.md` },
