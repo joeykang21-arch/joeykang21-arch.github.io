@@ -131,6 +131,15 @@ const videosFor = (section: string) => videos.filter((v) => v.data.section === s
           </li>
         </ul>
       </div>
+      <Gallery
+        rows={[
+          [
+            { id: 'project-fourier', shape: 'pano' },
+            { id: 'project-duffing', shape: 'pano' },
+            { id: 'project-breadboard', shape: 'wide' },
+          ],
+        ]}
+      />
     </section>
 
     <section class="section block" id="other" aria-labelledby="other-title">

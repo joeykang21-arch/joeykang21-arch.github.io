@@ -1,10 +1,10 @@
 ---
-// Photos in rows of equal height. Each photo is cropped to a tall (4:5) or
-// wide (3:2) shape, so every row lines up. On phones, tall photos sit two
-// to a row and wide photos take the full width.
+// Photos in rows of equal height. Each photo is cropped to a tall (4:5),
+// wide (3:2) or pano (2:1) shape, so every row lines up. On phones, tall photos sit two
+// to a row and wide and pano photos take the full width.
 import Photo from './Photo.astro';
 
-type Shape = 'tall' | 'wide';
+type Shape = 'tall' | 'wide' | 'pano';
 interface Item {
   id: string;
   shape: Shape;
@@ -15,10 +15,11 @@ interface Props {
   rows: Item[][];
 }
 
-const ratio: Record<Shape, number> = { tall: 4 / 5, wide: 3 / 2 };
+const ratio: Record<Shape, number> = { tall: 4 / 5, wide: 3 / 2, pano: 2 };
 const sizes: Record<Shape, string> = {
   tall: '(min-width: 640px) 16rem, 50vw',
   wide: '(min-width: 640px) 30rem, 100vw',
+  pano: '(min-width: 640px) 30rem, 100vw',
 };
 const { rows } = Astro.props;
 ---
@@ -48,7 +49,8 @@ const { rows } = Astro.props;
   .row {
     display: contents;
   }
-  .wide {
+  .wide,
+  .pano {
     grid-column: span 2;
   }
   @media (min-width: 640px) {

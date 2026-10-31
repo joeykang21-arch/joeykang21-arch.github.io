@@ -83,3 +83,15 @@ other-frozen-lake:
 other-night-sky:
   alt: "Silhouettes of four people against a starry night sky glowing red and purple"
   caption: "Aurora at Cherry Springs, PA"
+
+project-fourier:
+  alt: "MATLAB plot of a periodic signal and its Fourier series approximations with 3, 23 and 43 terms"
+  caption: "Fourier series"
+
+project-duffing:
+  alt: "Grid of 20 MATLAB plots showing the chaotic Duffing equation solution at successive points in time"
+  caption: "Duffing equation"
+
+project-breadboard:
+  alt: "Hand holding a breadboard circuit with logic-gate chips and many colored wires on a digital evaluation board"
+  caption: "Digital design final project"
