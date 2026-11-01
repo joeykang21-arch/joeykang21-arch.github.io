@@ -2,7 +2,7 @@
 export const SITE = {
   name: 'Joseph Kang',
   description:
-    'Joseph Kang: Data & AI Program Analyst at JPMorgan Chase, part-time Penn master’s student in AI, and independent AI safety researcher.',
+    'Joseph Kang: Data & AI Analyst at JPMorgan Chase, part-time Penn master’s student in AI, and independent AI safety researcher.',
   email: 'joeykang21@gmail.com',
 };
 
