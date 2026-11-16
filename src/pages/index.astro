@@ -7,7 +7,7 @@ import PostList from '../components/PostList.astro';
 import { LINKS, SITE } from '../site';
 import headshot from '../assets/photos/headshot.jpg';
 
-const posts = (await getCollection('writing', (p) => !p.data.draft))
+const posts = (await getCollection('writing', (p) => !p.data.draft && p.data.category === 'ai-safety'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 
@@ -15,13 +15,13 @@ const research = [
   {
     when: 'Oct 2026',
     title: 'Accuracy and Influence of OpenAI’s German Wiki Agent Swarm',
-    href: '/research/#wiki-swarm',
+    href: 'https://github.com/joeykang21-arch/german-wiki-swarm-accuracy/blob/main/writeup.md',
     summary: 'Hand-checked answers from 14,591 wiki edits against official data, and how much the agents’ shared board swayed them.',
   },
   {
     when: 'Aug – Oct 2026',
-    title: 'Why does the model output an odd number?',
-    href: '/research/#odd-number',
+    title: 'What Makes a Reasoning Model Game Its Grader?',
+    href: 'https://github.com/joeykang21-arch/odd-number-forensics/blob/main/WRITEUP.md',
     summary: 'Reward-hacking forensics on a reasoning LLM: what makes a model game an in-context grader.',
   },
   {
@@ -72,13 +72,12 @@ const research = [
           and forecasting. If you're working on either, <a href={`mailto:${SITE.email}`}>I'd love to hear from you</a>.
         </li>
         <li>
-          <strong>Studying</strong> part-time for a master's in Artificial Intelligence at the University of Pennsylvania, since August 2026. 
-            I may take a leave of absence to search for part time AI safety roles. 
+          <strong>Studying</strong> part-time for a master's in Artificial Intelligence at the University of Pennsylvania, since August 2026.
         </li>
         <li>
           <strong>Researching</strong> reward hacking and agent behavior on my own time: what makes a model{' '}
-          <a href="/research/#odd-number">reward hack simple tasks with a grader</a>, and the accuracy and collusion influence
-            of OpenAI's agent swarm on the{' '}
+          <a href="/research/#odd-number">reward hack simple tasks with a grader</a>, and the accuracy and influence
+          of OpenAI's agent swarm on the{' '}
           <a href="/research/#wiki-swarm">German wiki site</a>.
         </li>
         <li>
